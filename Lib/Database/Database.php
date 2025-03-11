@@ -1,6 +1,6 @@
 <?php
 
-namespace Database;
+namespace Lib\Database;
 
 use Exception;
 use mysqli;
@@ -10,18 +10,18 @@ class Database {
     protected $server;
     protected $user;
     protected $password;
-    protected $database;
+    protected $database_name;
     protected $port;
 
     public function __construct() {
         $this->server = getenv("DB_HOST") ?: "127.0.0.1";
         $this->user = getenv("DB_USERNAME") ?: "root";
         $this->password = getenv("DB_PASSWORD") ?: "";
-        $this->database = getenv("DB_DATABASE") ?: "web";
+        $this->database_name = getenv("DB_DATABASE") ?: "web";
         $this->port = getenv("DB_PORT") ?: "3306"; 
 
         if (!isset(self::$conn)) {
-            self::$conn = new mysqli($this->server, $this->user, $this->password, $this->database, $this->port);
+            self::$conn = new mysqli($this->server, $this->user, $this->password, $this->database_name, $this->port);
 
             // Verificar errores de conexión
             if (self::$conn->connect_error) {
