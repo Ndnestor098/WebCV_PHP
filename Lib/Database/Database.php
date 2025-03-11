@@ -14,11 +14,11 @@ class Database {
     protected $port;
 
     public function __construct() {
-        $this->server = getenv("DB_HOST");
-        $this->user = getenv("DB_USERNAME");
-        $this->password = getenv("DB_PASSWORD");
-        $this->database = getenv("DB_DATABASE");
-        $this->port = getenv("DB_PORT");
+        $this->server = getenv("DB_HOST") ?: "127.0.0.1";
+        $this->user = getenv("DB_USERNAME") ?: "root";
+        $this->password = getenv("DB_PASSWORD") ?: "";
+        $this->database = getenv("DB_DATABASE") ?: "web";
+        $this->port = getenv("DB_PORT") ?: "3306"; 
 
         if (!isset(self::$conn)) {
             self::$conn = new mysqli($this->server, $this->user, $this->password, $this->database, $this->port);
