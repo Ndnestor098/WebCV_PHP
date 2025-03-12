@@ -14,6 +14,7 @@ class Route {
      */
     public static function get($uri, $callback) {
         $uri = trim($uri, "/");
+
         self::$route['GET'][$uri] = $callback;
 
         self::dispatch();
