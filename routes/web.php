@@ -1,7 +1,7 @@
 <?php
 
-use Http\Route;
+use Lib\Http\Route;
 
 Route::get("/", function () {
-    return "Hola";
+    echo "Pagina Principal";
 });
