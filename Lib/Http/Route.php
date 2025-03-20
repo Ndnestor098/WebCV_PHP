@@ -4,6 +4,12 @@ namespace Lib\Http;
 
 class Route {
     protected static $route = array();
+    protected static $routeNames = array();
+    protected static $lastUri;
+
+    public static function run() {
+        self::dispatch();
+    }
 
     /**
      * Metodo GET.
@@ -13,13 +19,15 @@ class Route {
      *
      */
     public static function get($uri, $callback) {
+        self::$lastUri = $uri;
+        
         $uri = trim($uri, "/");
-
+        
         self::$route['GET'][$uri] = $callback;
 
-        self::dispatch();
+        return new self;
     }
-
+    
     /**
      * Metodo POST.
      *
@@ -28,12 +36,19 @@ class Route {
      *
      */
     public static function post(string $uri, callable $callback) {
+        self::$lastUri = $uri;
+        
         $uri = trim($uri, "/");
+        
         self::$route['POST'][$uri] = $callback;
-
-        self::dispatch();
+        
+        return new self;
     }
 
+    /**
+     * Ejecuta las funciones de los callback guardados cuando se accede a la ruta correspondiente.
+     *
+     */
     public static function dispatch() {
         $uri = $_SERVER["REQUEST_URI"];
         $uri = trim($uri, "/");
@@ -45,5 +60,26 @@ class Route {
                 return;
             }
         }
+    }
+
+    /**
+     * Metodo name para asignar un nombre a la ruta.
+     *
+     * @param  string $name  Nombre de la ruta.
+     * @return void
+     */
+    public function name($name) {
+        self::$routeNames[$name] = self::$lastUri;
+        return $this;
+    }
+
+    /**
+     * Obtiene la URI asociada a un nombre de ruta.
+     *
+     * @param string $name Nombre de la ruta.
+     * @return string Retorna la URI si existe, o un mensaje de error si no está definida.
+     */
+    public static function routes($name) {
+        return self::$routeNames[$name] ?? displayError("The specified \"$name\" path was not found");
     }
 }

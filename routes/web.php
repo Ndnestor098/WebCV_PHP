@@ -11,9 +11,9 @@ Route::get("/", function () {
         ], 
         "test_2" => 1,
     ]);
-});
+})->name("home");
 
 Route::get("/contact", function () {
 
     return render("contact");
-});
+})->name("contact");

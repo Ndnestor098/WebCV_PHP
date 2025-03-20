@@ -1,5 +1,8 @@
 <h1>Este es mi Home</h1>
 
-<?= $test_2 ?>
+<?php components('menu') ?>
 
-<p>hola</p>
+<?= $test->name ?>
+
+<?php routes("home") ?>
+
