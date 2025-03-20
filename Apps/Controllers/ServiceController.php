@@ -4,11 +4,12 @@ namespace Apps\Controllers;
 
 class ServiceController 
 {
-    public function index($slug) {
+    public function index($slug, $id) {
         
 
         return render("service", [
-            "slug" => $slug
+            "slug" => $slug,
+            "id" => $id,
         ]);
     }
 }

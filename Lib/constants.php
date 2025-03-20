@@ -34,8 +34,8 @@ function components(string $file) {
  *
  * @param string $name nombre solicitado para determinar si hay una ruta definida.
 */
-function routes(string $name) {
-    echo Route::routes($name);
+function routes(string $name, array $array = []) {
+    echo Route::routes($name, $array);
 }
 
 function displayError($error) {

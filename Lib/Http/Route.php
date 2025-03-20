@@ -129,7 +129,25 @@ class Route {
      * @param string $name Nombre de la ruta.
      * @return string Retorna la URI si existe, o un mensaje de error si no está definida.
      */
-    public static function routes($name) {
-        return self::$routeNames[$name] ?? displayError("The specified \"$name\" path was not found");
+    public static function routes($name, $array = []) {
+        $route = self::$routeNames[$name];
+
+        if(strpos($route, ":") !== false){
+            foreach($array as $key => $value){
+                if(preg_match("#:$key#", $route)){
+                    $route = preg_replace("#:$key#", $value, $route);
+                } else {
+                    displayError("There is no such parameter as \"" . $key . "\"");
+                }
+            }
+        }
+
+        if(preg_match("#:[a-zA-Z]+#", $route)){
+            displayError("There are missing parameters to add to the route \"" . $name . "\"");
+        }
+
+
+
+        return $route ?? displayError("The specified \"$name\" path was not found");
     }
 }

@@ -24,4 +24,4 @@ Route::get("/about", function () {
     return render("about");
 })->name("about");
 
-Route::get("/service/:slug", ServiceController::class)->name("service");
+Route::get("/service/:slug/:id", ServiceController::class)->name("service");
