@@ -17,3 +17,15 @@ Route::get("/contact", function () {
 
     return render("contact");
 })->name("contact");
+
+Route::get("/about", function () {
+
+    return render("about");
+})->name("about");
+
+Route::get("/service/:slug", function ($slug) {
+
+    return render("service", [
+        "slug" => $slug
+    ]);
+})->name("service");

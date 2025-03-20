@@ -2,4 +2,4 @@
 
 <?php components("menu") ?>
 
-<?php routes("home") ?>
+<?php echo $slug ?>

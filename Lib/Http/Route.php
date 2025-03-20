@@ -55,8 +55,15 @@ class Route {
         $method = $_SERVER["REQUEST_METHOD"];
 
         foreach (self::$route[$method] as $route => $callback) {
-            if($route == $uri){
-                $callback();
+
+            if(strpos($route, ":") !== false){
+                $route = preg_replace("#:[a-zA-z]+#", "([a-zA-Z0-9-_]+)", $route);
+            }
+
+            if(preg_match("#^$route$#", $uri, $matches)){
+                $params = array_slice($matches, 1);
+                
+                $callback(...$params);
                 return;
             }
         }
