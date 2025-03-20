@@ -1,5 +1,6 @@
 <?php
 
+use Apps\Controllers\ServiceController;
 use Lib\Http\Route;
 
 Route::get("/", function () {
@@ -23,9 +24,4 @@ Route::get("/about", function () {
     return render("about");
 })->name("about");
 
-Route::get("/service/:slug", function ($slug) {
-
-    return render("service", [
-        "slug" => $slug
-    ]);
-})->name("service");
+Route::get("/service/:slug", ServiceController::class)->name("service");

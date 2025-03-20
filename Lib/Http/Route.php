@@ -2,6 +2,8 @@
 
 namespace Lib\Http;
 
+use function PHPSTORM_META\type;
+
 class Route {
     protected static $route = array();
     protected static $routeNames = array();
@@ -21,6 +23,18 @@ class Route {
     public static function get($uri, $callback) {
         self::$lastUri = $uri;
         
+        // Si el callback es un string (nombre de clase)
+        if (is_string($callback) && class_exists($callback)) {
+            $class = new $callback();
+            $callback = [$class, "index"]; // Llamamos al método 'index' por defecto
+        } 
+        
+        // Si el callback es un array ['Clase', 'metodo']
+        elseif (is_array($callback) && class_exists($callback[0])) {
+            $class = new $callback[0]();
+            $callback = [$class, $callback[1]]; // Guardamos referencia a la función
+        }
+
         $uri = trim($uri, "/");
         
         self::$route['GET'][$uri] = $callback;
@@ -37,6 +51,18 @@ class Route {
      */
     public static function post(string $uri, callable $callback) {
         self::$lastUri = $uri;
+
+        // Si el callback es un string (nombre de clase)
+        if (is_string($callback) && class_exists($callback)) {
+            $class = new $callback();
+            $callback = [$class, "index"]; // Llamamos al método 'index' por defecto
+        } 
+        
+        // Si el callback es un array ['Clase', 'metodo']
+        elseif (is_array($callback) && class_exists($callback[0])) {
+            $class = new $callback[0]();
+            $callback = [$class, $callback[1]]; // Guardamos referencia a la función
+        }
         
         $uri = trim($uri, "/");
         
@@ -49,21 +75,38 @@ class Route {
      * Ejecuta las funciones de los callback guardados cuando se accede a la ruta correspondiente.
      *
      */
-    public static function dispatch() {
+    public static function dispatch() { 
         $uri = $_SERVER["REQUEST_URI"];
         $uri = trim($uri, "/");
         $method = $_SERVER["REQUEST_METHOD"];
+    
+        $routes = self::$route[$method] ?? [];
+    
+        $total = count($routes);
+        $counter = 0;
 
-        foreach (self::$route[$method] as $route => $callback) {
+        foreach ($routes as $route => $callback) {
+            $counter++;
 
-            if(strpos($route, ":") !== false){
-                $route = preg_replace("#:[a-zA-z]+#", "([a-zA-Z0-9-_]+)", $route);
+            if (strpos($route, ":") !== false) {
+                $route = preg_replace("#:[a-zA-Z]+#", "([a-zA-Z0-9-_]+)", $route);
             }
-
-            if(preg_match("#^$route$#", $uri, $matches)){
+    
+            if (preg_match("#^$route$#", $uri, $matches)) {
                 $params = array_slice($matches, 1);
-                
                 $callback(...$params);
+                return;
+            }
+            
+            if ($counter === $total) {  
+                if (strpos($route, "([a-zA-Z0-9-_]+)") !== false) {
+                    displayError("Route not found, parameters need to be added.");
+
+                    return;
+                }
+
+                displayError("Route not found.");
+
                 return;
             }
         }
