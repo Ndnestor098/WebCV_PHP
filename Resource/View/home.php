@@ -4,5 +4,5 @@
 
 <?= $test->name ?>
 
-<?php routes("home") ?>
+
 

@@ -1,16 +1,15 @@
 <?php
 
 use Apps\Controllers\ServiceController;
+use Apps\Models\User;
 use Lib\Http\Route;
 
 Route::get("/", function () {
 
+    $query = User::first();
+    
     return render("home", [
-        "test" => [
-            "id"=>1,
-            "name"=>"nestor",
-        ], 
-        "test_2" => 1,
+        "test" =>  $query,
     ]);
 })->name("home");
 
