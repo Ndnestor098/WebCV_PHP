@@ -4,19 +4,13 @@ use Apps\Controllers\ServiceController;
 use Apps\Models\User;
 use Lib\Http\Request;
 use Lib\Http\Route;
+use Lib\Http\Sessions;
 
 Route::get("/", function (Request $request) {
-    $request->validate([
-        "name" => ["required", "string"],
-    ]);
-    
     $query = User::first();
 
-    
-    
     return render("home", [
         "test" =>  $query,
-        "request" => $request->input("name"),
     ]);
 })->name("home");
 
@@ -31,3 +25,15 @@ Route::get("/about", function () {
 })->name("about");
 
 Route::get("/service/:slug/:id", ServiceController::class)->name("service");
+
+Route::post("/login", function(Request $request) {
+    $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required', 'numeric'],
+    ]);
+
+    var_dump(Sessions::get("errors"));
+    var_dump(Sessions::get("old"));
+
+    redirect("/");
+})->name("login");

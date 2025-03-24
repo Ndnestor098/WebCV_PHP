@@ -1,6 +1,7 @@
 <?php
 
 use Lib\Http\Route;
+use Lib\Http\Sessions;
 
 /**
  * Renderiza una vista desde la carpeta "Resource/View".
@@ -55,4 +56,47 @@ function displayError($error) {
     ob_end_flush();
 
     exit(); 
+}
+
+/**
+ * Busca si hay errores, en caso de encontrar imprime el mensaje, caso contrario retorna false.
+ *
+ * @param string $key nombre de la variable a buscar en los errores.
+*/
+function errors($key) {
+    $array = Sessions::get("errors");
+
+    echo $array ? $array[$key] : false;
+}
+
+/**
+ * Comprueba si hay errores, si hay retorna true caso contrario retorna false.
+ *
+ * @param string $key nombre de la variable a buscar en los errores.
+*/
+function hasError($key) {
+    $array = Sessions::get("errors");
+    
+    return $array && isset($array[$key]) ? true : false;
+}
+
+/**
+ * Devuelve los ultimos valores usados en el ultimo formulario.
+ *
+ * @param string $key nombre de la variable a buscar en los que se han guardado.
+*/
+function old($key) {
+    $array = Sessions::get("old");
+    
+    echo $array ? $array[$key] : false;
+}
+
+/**
+ * Rederige hacia una pagina especificada.
+ *
+ * @param string $route ruta o path donde rediregir.
+*/
+function redirect($route) {
+    header("Location: " . $route);
+    exit();
 }

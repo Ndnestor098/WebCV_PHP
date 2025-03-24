@@ -12,7 +12,10 @@ class ServiceController
     }
 
     public function login(Request $request) {
-        return $request->all();
+        $request->validate([
+            "email" => ["required", "email"],
+            "password" => ["required", "string"],
+        ]);
 
         return render("service");
     }

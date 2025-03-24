@@ -2,7 +2,23 @@
 
 <?php components('menu') ?>
 
-<?= $test->name ?>
+<form action="<?= routes("login")?>" method="post">
+    <div>
+        <input type="text" name="email" value="<?= old('email') ?>" placeholder="Email">
+        <br>
+        <?php if(hasError('email')){
+            echo errors('email');
+        }    
+        ?>
+    </div>
+    <div>
+        <input type="password" name="password" value="" placeholder="Password">
+        <br>
+        <?php if(hasError('password')){
+            echo errors('password');
+        }    
+        ?>
+    </div>
 
-<?= $request ?>
-
+    <button type="submit">Enviar</button>
+</form>

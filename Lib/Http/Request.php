@@ -56,6 +56,8 @@ class Request {
     public function validate(array $array)
     {
         $errors = [];
+        Sessions::set("old", $this->all());
+
         foreach ($array as $key => $value) {
             foreach ($value as $rule) {
                 if($rule == 'required' && empty($this->input($key))) {
@@ -76,19 +78,19 @@ class Request {
                 if($rule == 'string' && !is_string($this->input($key))) {
                     $errors[$key] = "El campo $key debe ser un string";
                 }
-
-                $errors['hasErrors'] = count($errors) > 0;
-                $errors["http"] = $errors['hasErrors'] ? 400 : 200;
-
-                return $errors['hasErrors'] ? $this->back($errors[$key]) : $errors;
-
             }
         }
+
+        $errors['hasErrors'] = count($errors) > 0;
+        $errors["http"] = $errors['hasErrors'] ? 400 : 200;
+
+        return $errors['hasErrors'] ? $this->back($errors) : $errors;
+
     }
 
     public function back($attribute)
     {
         Sessions::set('errors', $attribute);
-        header("Location: {$_SERVER['HTTP_REFERER']}");    
+        header("Location: {$_SERVER['HTTP_REFERER']}");
     }
 }

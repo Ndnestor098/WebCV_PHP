@@ -80,14 +80,14 @@ class Route {
         $uri = parse_url($uri, PHP_URL_PATH); 
         $uri = trim($uri, "/");
         $method = $_SERVER["REQUEST_METHOD"];
-    
+
         $routes = self::$route[$method] ?? [];
         
         foreach ($routes as $route => $callback) {
             if (strpos($route, ":") !== false) {
                 $route = preg_replace("#:[a-zA-Z]+#", "([a-zA-Z0-9-_]+)", $route);
             }
-    
+            
             if (preg_match("#^$route$#", $uri, $matches)) {
                 $params = array_slice($matches, 1);
     
@@ -97,7 +97,7 @@ class Route {
                 return;
             }
         }
-    
+        
         displayError("Route not found.");
     }
     
