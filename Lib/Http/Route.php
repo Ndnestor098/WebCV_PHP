@@ -77,40 +77,30 @@ class Route {
      */
     public static function dispatch() { 
         $uri = $_SERVER["REQUEST_URI"];
+        $uri = parse_url($uri, PHP_URL_PATH); 
         $uri = trim($uri, "/");
         $method = $_SERVER["REQUEST_METHOD"];
     
         $routes = self::$route[$method] ?? [];
-    
-        $total = count($routes);
-        $counter = 0;
-
+        
         foreach ($routes as $route => $callback) {
-            $counter++;
-
             if (strpos($route, ":") !== false) {
                 $route = preg_replace("#:[a-zA-Z]+#", "([a-zA-Z0-9-_]+)", $route);
             }
     
             if (preg_match("#^$route$#", $uri, $matches)) {
                 $params = array_slice($matches, 1);
-                $callback(...$params);
-                return;
-            }
-            
-            if ($counter === $total) {  
-                if (strpos($route, "([a-zA-Z0-9-_]+)") !== false) {
-                    displayError("Route not found, parameters need to be added.");
-
-                    return;
-                }
-
-                displayError("Route not found.");
-
+    
+                $request = new Request();
+    
+                $callback($request, ...$params);
                 return;
             }
         }
+    
+        displayError("Route not found.");
     }
+    
 
     /**
      * Metodo name para asignar un nombre a la ruta.
@@ -149,5 +139,20 @@ class Route {
 
 
         return $route ?? displayError("The specified \"$name\" path was not found");
+    }
+
+    public function middleware($name) {
+        if(is_array($name)){
+            foreach ($name as $value) {
+                $middleware = "Apps\\Middleware\\" . ucwords($value);
+                $middleware::handle();
+            }
+
+            return $this;
+        }
+
+        $middleware = "Apps\\Middleware\\" . ucwords($name);
+        $middleware::handle();
+        return $this;
     }
 }

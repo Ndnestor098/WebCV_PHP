@@ -26,6 +26,8 @@ function render(string $file, array $data = []) {
  * @param string $file Nombre del archivo del componente (sin extensión).
 */
 function components(string $file) {
+    $file = str_replace(".", "/", $file);
+    $file = strtoupper($file);
     require_once "../Resource/View/Components/" . $file . ".php";
 }
 
@@ -38,6 +40,11 @@ function routes(string $name, array $array = []) {
     echo Route::routes($name, $array);
 }
 
+/**
+ * Gestiona los errores y muestra un error en pantalla.
+ *
+ * @param string $error mensaje de error para mostrar en pantalla.
+*/
 function displayError($error) {
     ob_end_clean(); 
 
