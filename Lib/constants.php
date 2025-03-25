@@ -27,10 +27,25 @@ function render(string $file, array $data = []) {
  * @param string $file Nombre del archivo del componente (sin extensión).
 */
 function components(string $file) {
-    $file = str_replace(".", "/", $file);
-    $file = strtoupper($file);
     require_once "../Resource/View/Components/" . $file . ".php";
 }
+
+/**
+ * Renderiza un layout desde la carpeta "Resource/View/Components"
+ * e inserta contenido en la posición exacta.
+ *
+ * @param string $file Nombre del archivo del layout (sin extensión).
+ * @param callable $content Contenido dinámico a insertar.
+ */
+function layout(string $file, callable $content) {
+    ob_start(); 
+    $content(); // Captura el contenido dinámico
+    $GLOBALS["__content"] = ob_get_clean(); // Lo guarda en una variable global
+
+    require_once "../Resource/View/Components/" . $file . ".php";
+}
+
+
 
 /**
  * Gestiona la disponibilidad y búsqueda de rutas URI.

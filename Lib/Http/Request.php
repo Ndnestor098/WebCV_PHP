@@ -82,7 +82,7 @@ class Request {
         }
 
         $errors['hasErrors'] = count($errors) > 0;
-        $errors["http"] = $errors['hasErrors'] ? 400 : 200;
+        $errors["status"] = $errors['hasErrors'] ? 400 : 200;
 
         return $errors['hasErrors'] ? $this->back($errors) : $errors;
 
