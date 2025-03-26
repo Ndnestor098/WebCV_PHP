@@ -25,15 +25,8 @@ class Route {
         
         // Si el callback es un string (nombre de clase)
         if (is_string($callback) && class_exists($callback)) {
-            $method = false;
-
-            if(is_array($callback)){
-                $callback = $callback[0];
-                $method = $callback[1];
-            }
-            
             $class = new $callback();
-            $callback = [ $class, $method ? $method : "index" ];
+            $callback = [ $class, "index" ];
         } 
         
         // Si el callback es un array ['Clase', 'metodo']
@@ -56,20 +49,13 @@ class Route {
      * @param  callable $callback  $callback Contiene la funcion a ejecutar en la uri.
      *
      */
-    public static function post(string $uri, callable $callback) {
+    public static function post(string $uri, $callback) {
         self::$lastUri = $uri;
 
         // Si el callback es un string (nombre de clase)
         if (is_string($callback) && class_exists($callback)) {
-            $method = false;
-
-            if(is_array($callback)){
-                $callback = $callback[0];
-                $method = $callback[1];
-            }
-            
             $class = new $callback();
-            $callback = [ $class, $method ? $method : "index" ];
+            $callback = [ $class, "index" ];
         }  
         
         // Si el callback es un array ['Clase', 'metodo']

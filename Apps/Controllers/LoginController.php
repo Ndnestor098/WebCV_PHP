@@ -9,11 +9,17 @@ class LoginController
 {
     public function index() {
         
-        return render("service");
+        return render("login");
     }
 
     public function login(Request $request) {
-        echo "Login";
+        $request->validate([
+            "email" => ["required","email"],
+            "name" => ["required","string"],
+            "password" => ["required","string"],
+        ]);
+
+        var_dump($request->all());
     }
 
     public function logout() {

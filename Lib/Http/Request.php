@@ -57,13 +57,14 @@ class Request {
     {
         $errors = [];
         Sessions::set("old", $this->all());
+        Sessions::remove("errors");
 
         foreach ($array as $key => $value) {
             foreach ($value as $rule) {
                 if($rule == 'required' && empty($this->input($key))) {
                     $errors[$key] = "El campo $key es requerido";
                 }
-                if($rule == 'email' && !filter_var($this->input($key), FILTER_VALIDATE_EMAIL)) {
+                if($rule == 'email' && !preg_match("/^[\w\.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/", $this->input($key))) {
                     $errors[$key] = "El campo $key debe ser un email";
                 }
                 if($rule == 'numeric' && !is_numeric($this->input($key))) {
@@ -83,8 +84,13 @@ class Request {
 
         $errors['hasErrors'] = count($errors) > 0;
         $errors["status"] = $errors['hasErrors'] ? 400 : 200;
+        
+        if($errors['hasErrors']) {
+            return $this->back($errors);
+        }
 
-        return $errors['hasErrors'] ? $this->back($errors) : $errors;
+        Sessions::remove("old");
+        return $errors;
 
     }
 

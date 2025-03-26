@@ -109,7 +109,7 @@ function hasError($key) {
 function old($key) {
     $array = Sessions::get("old");
     
-    echo $array ? $array[$key] : false;
+    echo $array && isset($array[$key]) ? $array[$key] : false;
 }
 
 /**
