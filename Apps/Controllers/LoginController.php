@@ -3,8 +3,9 @@
 namespace Apps\Controllers;
 
 use Lib\Http\Request;
+use Lib\Http\Sessions;
 
-class ServiceController 
+class LoginController 
 {
     public function index() {
         
@@ -12,12 +13,7 @@ class ServiceController
     }
 
     public function login(Request $request) {
-        $request->validate([
-            "email" => ["required", "email"],
-            "password" => ["required", "string"],
-        ]);
-
-        return render("service");
+        echo "Login";
     }
 
     public function logout() {

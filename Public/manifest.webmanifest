@@ -1,6 +1,6 @@
 {
     "name": "CV: Nestor Salom",
-    "short_name": "CV: Nestor Salom",
+    "short_name": "Nestor Salom",
     "description": "Programador Junior: Nestor Salom",
     "lang": "es",
     "start_url": "/",
@@ -28,9 +28,7 @@
         {
             "src": "/assets/images/present.webp",
             "sizes": "1631x1013",
-            "type": "image/png",
-            "form_factor": "wide",
-            "label": "Application"
+            "type": "image/png"
         }
     ]
 } 

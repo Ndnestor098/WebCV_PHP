@@ -25,8 +25,15 @@ class Route {
         
         // Si el callback es un string (nombre de clase)
         if (is_string($callback) && class_exists($callback)) {
+            $method = false;
+
+            if(is_array($callback)){
+                $callback = $callback[0];
+                $method = $callback[1];
+            }
+            
             $class = new $callback();
-            $callback = [$class, "index"]; // Llamamos al método 'index' por defecto
+            $callback = [ $class, $method ? $method : "index" ];
         } 
         
         // Si el callback es un array ['Clase', 'metodo']
@@ -54,9 +61,16 @@ class Route {
 
         // Si el callback es un string (nombre de clase)
         if (is_string($callback) && class_exists($callback)) {
+            $method = false;
+
+            if(is_array($callback)){
+                $callback = $callback[0];
+                $method = $callback[1];
+            }
+            
             $class = new $callback();
-            $callback = [$class, "index"]; // Llamamos al método 'index' por defecto
-        } 
+            $callback = [ $class, $method ? $method : "index" ];
+        }  
         
         // Si el callback es un array ['Clase', 'metodo']
         elseif (is_array($callback) && class_exists($callback[0])) {
