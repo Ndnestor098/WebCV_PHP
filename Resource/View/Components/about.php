@@ -1,5 +1,5 @@
  <!-- -------------------------- Sobre mi persona -------------------------- -->
- <div id="Ubicacion-SMP">
+ <div id="about">
     <h2 id="sbm">About Me</h2>
     <section class="sobre-mi">
         <div class="area-img-sobre-mi">

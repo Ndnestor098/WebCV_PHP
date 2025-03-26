@@ -47,5 +47,5 @@ class Database {
                " <br>Database: " . getenv("DB_DATABASE") .
                " <br>User Name: " . getenv("DB_USERNAME") . 
                " <br>Password: " . getenv("DB_PASSWORD");
-    }    
+    }
 }

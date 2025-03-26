@@ -26,7 +26,13 @@ function render(string $file, array $data = []) {
  *
  * @param string $file Nombre del archivo del componente (sin extensión).
 */
-function components(string $file) {
+function components(string $file, ...$data) {
+    if (!empty($data)) {
+        foreach ($data as $value) {
+            extract($value);
+        }
+    }
+
     require_once "../Resource/View/Components/" . $file . ".php";
 }
 

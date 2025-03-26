@@ -116,11 +116,12 @@ nav{
                     flex-direction: column;
                     text-align: center;
                     align-items: center;
-                }
+                } 
+
                 img{
                     cursor: pointer;
                 }
-                a{
+                span{
                     font-size: 14px;
                     color: #ffffff;
                     display: none;
@@ -310,10 +311,11 @@ h2{
             
             .title-cuadrado-experiencias{
                 color: #80b39c;
-                font-size: 20px;
+                font-size: 22px;
                 text-align: center;
                 margin: 0;
                 margin-top: 45px;
+                font-weight: 700;
             }
 
             span{

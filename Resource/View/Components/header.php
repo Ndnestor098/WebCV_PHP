@@ -1,5 +1,5 @@
 <!--------------- Presentacion del inicio de header --------------->
-<header>
+<header id="home">
     <span class="world" id="lenguague">
         <img src="/assets/images/svg/lenguague.svg" width="30px" title="Pagina de Nestor" alt="Nestor - lenguague">
     </span>

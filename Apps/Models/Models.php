@@ -90,4 +90,25 @@ class Models {
         return $data;
     }
 
+    public static function create($row, $value) 
+    {
+        self::init();
+
+        $table = self::$table;
+
+        $row = implode(", ", $row);
+        $value = "'" . implode("', '", $value) . "'";
+
+        self::$query = "INSERT INTO $table ($row) VALUES ($value)";
+
+        $result = self::setQuery(); 
+
+        if ($result) {
+            return self::convertObject($result);
+        } else {
+            echo "Error en la consulta.";
+            return null;
+        }
+    }
+
 }

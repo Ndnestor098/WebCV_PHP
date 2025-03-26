@@ -1,0 +1,36 @@
+{
+    "name": "CV: Nestor Salom",
+    "short_name": "CV: Nestor Salom",
+    "description": "Programador Junior: Nestor Salom",
+    "lang": "es",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#28ec88",
+    "background_color": "#1d2127",
+    "icons": [
+        {
+            "src": "/assets/images/favicon/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/images/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [    
+        {
+            "src": "/assets/images/present.webp",
+            "sizes": "1631x1013",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Application"
+        }
+    ]
+} 
