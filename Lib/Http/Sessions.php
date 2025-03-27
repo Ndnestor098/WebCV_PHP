@@ -40,7 +40,8 @@ class Sessions
     }
 
     public static function regenerate() {
-        session_start();
+        self::start();
+        
         session_regenerate_id(true);
     }
 }

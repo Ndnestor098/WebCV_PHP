@@ -51,15 +51,13 @@ function layout(string $file, callable $content) {
     require_once "../Resource/View/Components/" . $file . ".php";
 }
 
-
-
 /**
  * Gestiona la disponibilidad y búsqueda de rutas URI.
  *
  * @param string $name nombre solicitado para determinar si hay una ruta definida.
 */
 function routes(string $name, array $array = []) {
-    echo Route::routes($name, $array);
+    return Route::routes($name, $array);
 }
 
 /**

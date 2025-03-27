@@ -2,8 +2,8 @@
 
 namespace Apps\Controllers;
 
+use Lib\Auth\Auth;
 use Lib\Http\Request;
-use Lib\Http\Sessions;
 
 class LoginController 
 {
@@ -16,14 +16,19 @@ class LoginController
         $request->validate([
             "email" => ["required","email"],
             "name" => ["required","string"],
-            "password" => ["required","string"],
+            "password" => ["required"],
         ]);
 
-        var_dump($request->all());
+        if(Auth::attempt($request->input('email'), $request->input("password"))){
+            return redirect(routes("dashboard"));
+        }
+
+        return redirect(routes("login"));
     }
 
     public function logout() {
-        
-        return render("service");
+        Auth::logout();
+
+        return redirect(routes("home"));
     }
 }

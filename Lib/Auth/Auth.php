@@ -43,6 +43,9 @@ class Auth
                 Cookies::set("session_remember", $token, 259200);            
             }
 
+            Sessions::remove("old");
+            Sessions::remove("errors");
+
             return true;
         }
 
@@ -62,8 +65,6 @@ class Auth
         Cookies::remove("session_token");
 
         Sessions::regenerate();
-
-        redirect(routes("home"));
 
         return true;
     }

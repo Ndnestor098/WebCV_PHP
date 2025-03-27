@@ -117,7 +117,7 @@ layout("app", function () { ?>
                         <?php } ?>
                     </div>
                     <div>
-                        <input type="text" name="password" class="input" placeholder="Password">
+                        <input type="password" name="password" class="input" placeholder="Password">
                         <?php if (hasError("password")) { ?>
                             <span class="error"><?= errors("password") ?></span>
                         <?php } ?>
