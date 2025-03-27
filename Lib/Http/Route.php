@@ -2,6 +2,8 @@
 
 namespace Lib\Http;
 
+use Exception;
+
 use function PHPSTORM_META\type;
 
 class Route {
@@ -100,7 +102,6 @@ class Route {
         
         displayError("Route not found.");
     }
-    
 
     /**
      * Metodo name para asignar un nombre a la ruta.
@@ -141,18 +142,49 @@ class Route {
         return $route ?? displayError("The specified \"$name\" path was not found");
     }
 
-    public function middleware($name) {
-        if(is_array($name)){
-            foreach ($name as $value) {
-                $middleware = "Apps\\Middleware\\" . ucwords($value);
-                $middleware::handle();
-            }
 
-            return $this;
+    /**
+     * Ejecucion de middleware.
+     *
+     * @param string|array $name Nombre de la clase o clases para ejecutar.
+     * @return self
+     */
+    public static function middleware($name) 
+    {
+        if(self::$lastUri !== $_SERVER["REQUEST_URI"]) {
+            return new self;
         }
 
-        $middleware = "Apps\\Middleware\\" . ucwords($name);
-        $middleware::handle();
-        return $this;
+        // Si es un array de middlewares
+        if(is_array($name)) {
+            foreach ($name as $middleware) {
+                $middlewareClass = (strpos($middleware, "Apps\Middleware") !== false) 
+                    ? $middleware 
+                    : "Apps\\Middleware\\" . ucwords($middleware);
+                
+                if (!class_exists($middlewareClass)) {
+                    // Aquí puedes lanzar una excepción si el middleware no existe
+                    throw new Exception("Middleware no encontrado: $middlewareClass");
+                }
+                
+                $middlewareClass::handle();
+            }
+            return new self; // Si todo pasó bien, continua.
+        }
+    
+        // Si es solo un middleware
+        $middlewareClass = (strpos($name, "Apps\Middleware") !== false) 
+            ? $name 
+            : "Apps\\Middleware\\" . ucwords($name);
+        
+        if (!class_exists($middlewareClass)) {
+            // Si el middleware no existe, lanza un error
+            throw new Exception("Middleware no encontrado: $middlewareClass");
+        }
+    
+        $middlewareClass::handle();
+    
+        return new self;
     }
+    
 }
