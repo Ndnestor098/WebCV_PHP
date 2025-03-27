@@ -38,4 +38,9 @@ class Sessions
         self::start();
         unset($_SESSION[$key]);
     }
+
+    public static function regenerate() {
+        session_start();
+        session_regenerate_id(true);
+    }
 }

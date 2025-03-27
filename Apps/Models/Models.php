@@ -47,8 +47,7 @@ class Models {
         if ($result) {
             return self::convertObject($result);
         } else {
-            echo "Error en la consulta.";
-            return null;
+            return false;
         }
     }
 
@@ -65,13 +64,16 @@ class Models {
         if ($result) {
             return self::convertObject($result, true);
         } else {
-            echo "Error en la consulta.";
-            return null;
+            return false;
         }
     }
 
     protected static function convertObject($array, $first = false)
     {
+        if (!$array || !is_iterable($array)) {
+            return [];
+        }
+
         $data = [];
 
         foreach ($array as $row) { 
@@ -110,5 +112,40 @@ class Models {
             return null;
         }
     }
+
+    public static function where($field, $value) 
+    {
+        self::init();
+
+        $table = self::$table;
+
+        self::$query = "SELECT * FROM $table WHERE $field = '$value'";
+
+        $result = self::setQuery(); 
+
+        if ($result) {
+            return self::convertObject($result);
+        } else {
+            return false;
+        }
+    }
+
+    public static function update($field, $value) 
+    {
+        self::init();
+
+        $table = self::$table;
+
+        self::$query = "UPDATE $table SET $field = '$value'";
+
+        $result = self::setQuery(); 
+
+        if ($result) {
+            return self::convertObject($result);
+        } else {
+            return false;
+        }
+    }
+
 
 }

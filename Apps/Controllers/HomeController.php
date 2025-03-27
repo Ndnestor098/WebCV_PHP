@@ -5,12 +5,13 @@ namespace Apps\Controllers;
 use Apps\Models\Certificate;
 use Apps\Models\Language;
 use Apps\Models\Project;
+use Lib\Auth\Auth;
 use Lib\Http\Cookies;
 
 class HomeController 
 {
-    public function index() {
-
+    public function index() 
+    {
         if(Cookies::has("certificates") && Cookies::has("projects") && Cookies::has("lenguages")){
             $certificates = Cookies::get("certificates");
             $projects = Cookies::get("projects");
