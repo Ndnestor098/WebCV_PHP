@@ -47,7 +47,6 @@ class ProjectController
 
         Sessions::set("old", ["errors" => "Not found projects"]);
 
-
         return redirect(routes("dashboard"));
     }  
 }

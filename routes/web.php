@@ -14,6 +14,7 @@ Route::get("/", HomeController::class)->name("home");
 Route::get("/login", [LoginController::class, "index"]);
 
 Route::post("/login", [LoginController::class, "login"])->name("login");
+Route::get("/logout", [LoginController::class, "logout"])->name("logout");
  
 Route::get("/dashboard", DashboardController::class)->middleware(Auth::class)->name("dashboard");
 
@@ -27,7 +28,7 @@ Route::post("/certificate/adding", [CertificateController::class, "create"])->mi
 
 Route::get("/certificate/delete/:id", [CertificateController::class, "destroy"])->middleware(Auth::class)->name("certificate.delete");
 
-// =================================================== Lenguages ===================================================
-Route::post("/lenguage/adding", [LanguageController::class, "create"])->middleware(Auth::class)->name("lenguage.adding");
+// =================================================== Languages ===================================================
+Route::post("/language/adding", [LanguageController::class, "create"])->middleware(Auth::class)->name("language.adding");
 
-Route::get("/lenguage/delete/:id", [LanguageController::class, "destroy"])->middleware(Auth::class)->name("lenguage.delete");
+Route::get("/language/delete/:id", [LanguageController::class, "destroy"])->middleware(Auth::class)->name("language.delete");

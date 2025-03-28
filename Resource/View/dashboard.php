@@ -1,10 +1,20 @@
 <?php
 
-layout("app", function () use ($projects, $certificates) { ?>
+layout("app", function () use ($projects, $certificates, $languages) { ?>
+
+    
+    <a href="<?= routes("home") ?>" style="display: flex; flex-direction:column; align-items:center;width:50px;position:sticky;top:22px;left:10px">
+        <span style="color: #80b39c; font-weight:700">Home</span>
+    </a>
+
+    <a href="<?= routes("logout") ?>" style="display: flex; flex-direction:column; align-items:center;width:50px;position:sticky;top:22px;left:80px">
+        <span style="color: #80b39c; font-weight:700">Logout</span>
+    </a>
 
     <!--------------- Contenido de la pagina Web --------------->
     <main>
         <section>
+    <!-- =================================================== Projects =================================================== -->
             <?= components("projects", ["projects" => $projects]) ?>
 
             <div class="Experiencias">
@@ -68,6 +78,8 @@ layout("app", function () use ($projects, $certificates) { ?>
                 </div>
             </div>
 
+
+    <!-- =================================================== Certificates =================================================== -->
             <?= components("certificates", ["certificates" => $certificates]) ?>
             
             <div class="Experiencias">
@@ -108,6 +120,77 @@ layout("app", function () use ($projects, $certificates) { ?>
                                 <?= hasError("url") ? errors("url") : "" ?>
 
                                 <?= hasError("count_certificate") ? errors("count_certificate") : "" ?>
+
+                                <button 
+                                    type="submit"
+                                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px; cursor: pointer; background-color: #80b39c; color: white; font-size: 16px;"
+                                >
+                                    Send
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- =================================================== Languages =================================================== -->
+            <?= components("experience", ["languages" => $languages]) ?>
+            
+            <div class="Experiencias">
+                <div class="experiencia-content">
+                    <div class="cuadrado-experiencias">
+                        <p class="title-cuadrado-experiencias">Add a language</p>
+                        <div class="ordenar-experiencia" style="margin: 0;">
+                            <form action="<?= routes("language.adding") ?>" method="post" enctype="multipart/form-data" style="width: 100%; padding: 0 40px; margin-top: 40px;">
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    id="image" 
+                                    placeholder="Image" 
+                                    required
+                                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
+                                >
+                                <?= hasError("image") ? errors("image") : "" ?>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    id="name" 
+                                    placeholder="Name of the programming language" 
+                                    required
+                                    value="<?= old("title") ?>"
+                                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
+                                >
+                                <?= hasError("title") ? errors("title") : "" ?>
+                                
+
+                                <label for="level" style="color: #ccc;">Select the language domain</label>
+                                <select 
+                                    name="level" 
+                                    id="level" 
+                                    required 
+                                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
+                                    value="<?= old("level") ?>"
+                                >
+                                    <option value="Starting">Starting</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                                <?= hasError("level") ? errors("level") : "" ?>
+
+                                <label for="architecture" style="color: #ccc;">Select the architecture</label>
+                                <select 
+                                    name="architecture" 
+                                    id="architecture" 
+                                    required 
+                                    style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
+                                    value="<?= old("architecture") ?>"
+                                >
+                                    <option value="frontend">Front-End</option>
+                                    <option value="backend">Back-End</option>
+                                </select>
+                                <?= hasError("level") ? errors("level") : "" ?>
+
+                                <?= hasError("count_language") ? errors("count_language") : "" ?>
 
                                 <button 
                                     type="submit"

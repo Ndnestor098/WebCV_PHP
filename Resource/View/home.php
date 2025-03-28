@@ -1,4 +1,4 @@
-<?php layout("app", function () use ($certificates, $projects, $lenguages) { ?>
+<?php layout("app", function () use ($certificates, $projects, $languages) { ?>
     <div id="content-lenguague" style="display: none;">
         <div class="lenguague">
             <div class="cuadro">
@@ -56,7 +56,7 @@
         <?= components("projects", ["projects" => $projects])?>
         
         <!-- -------------------------- Experiencia -------------------------- -->
-        <?= components("experience", ["lenguages" => $lenguages])?>
+        <?= components("experience", ["languages" => $languages])?>
 
         <!-- -------------------------- Certificados -------------------------- -->      
         <?= components("certificates", ["certificates" => $certificates])?>

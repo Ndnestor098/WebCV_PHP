@@ -6,6 +6,10 @@ class Cookies
 {
     public static function set(string $key, mixed $value, int $time = 3600): void
     {
+        if(self::has("$key")){
+            self::remove($key);
+        }
+
         $value = is_array($value) ? json_encode($value) : $value;
 
         setcookie($key, $value, time() + $time, "/");

@@ -12,27 +12,27 @@ class HomeController
 {
     public function index() 
     {
-        if(Cookies::has("certificates") && Cookies::has("projects") && Cookies::has("lenguages")){
+        if(Cookies::has("certificates") && Cookies::has("projects") && Cookies::has("languages")){
             $certificates = Cookies::get("certificates");
             $projects = Cookies::get("projects");
-            $lenguages = Cookies::get("lenguages");
+            $languages = Cookies::get("languages");
 
         } else {
             $certificates = Certificate::get();
 
             $projects = Project::get();
     
-            $lenguages = Language::get();
+            $languages = Language::get();
 
             Cookies::set("certificates", $certificates);
             Cookies::set("projects", $projects);
-            Cookies::set("lenguages", $lenguages);
+            Cookies::set("languages", $languages);
         }
 
         return render("home", [
             "certificates" => $certificates,
             "projects" => $projects,
-            "lenguages" => $lenguages,
+            "languages" => $languages,
         ]);
     }
 }
