@@ -1,8 +1,8 @@
 <!--------------- Presentacion del inicio de header --------------->
 <header id="home">
-    <span class="world" id="lenguague">
+    <!-- <span class="world" id="lenguague">
         <img src="/assets/images/svg/lenguague.svg" width="30px" title="Pagina de Nestor" alt="Nestor - lenguague">
-    </span>
+    </span> -->
 
     <div class="presentacion">
         <h3>Hello, I'm</h3>

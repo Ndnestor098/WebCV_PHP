@@ -1,5 +1,5 @@
 <?php layout("app", function () use ($certificates, $projects, $languages) { ?>
-    <div id="content-lenguague" style="display: none;">
+    <!-- <div id="content-lenguague" style="display: none;">
         <div class="lenguague">
             <div class="cuadro">
                 <span id="cancel">
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--------------- Presentacion del inicio de header --------------->
     <?= components("header")?>
 
@@ -49,7 +49,7 @@
     <!--------------- Contenido de la pagina Web --------------->
     <main>
         <!-- -------------------------- Sobre mi persona -------------------------- -->
-        <?= components("about")?>
+        <?= components("about", ["projects" => $projects])?>
 
 
         <!-- -------------------------- Proyectos -------------------------- -->

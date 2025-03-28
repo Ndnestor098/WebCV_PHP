@@ -17,7 +17,7 @@
                 </div>
                 <div class="proyectos">
                     <p class="title-experiencias-clientes">Projects</p>
-                    <p>+6 projects</p>
+                    <p>+<?= count($projects) ?> projects</p>
                 </div>
             </div>
             <div class="area-texto">
