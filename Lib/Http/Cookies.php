@@ -31,6 +31,17 @@ class Cookies
 
     public static function remove(string $key): void
     {
-        setcookie($key, "", time() - 3600, "/");
+        setcookie($key, "", time() - 3600, "/", "", true, true);
     }
+
+    public static function flush() {
+        foreach ($_COOKIE as $key => $value) {
+            if ($key === "session_token" || $key === "PHPSESSID" || $key === "remember_token") {
+                continue;
+            }
+
+            setcookie($key, "", time() - 3600, "/", "", true, true);
+        }
+    }
+
 }

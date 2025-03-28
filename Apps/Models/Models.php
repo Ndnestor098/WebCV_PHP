@@ -147,5 +147,37 @@ class Models {
         }
     }
 
+    public static function delete($id) 
+    {
+        self::init();
 
+        $table = self::$table;
+
+        self::$query = "DELETE FROM $table WHERE id = '$id'";
+
+        $result = self::setQuery(); 
+
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static function find($id) 
+    {
+        self::init();
+
+        $table = self::$table;
+
+        self::$query = "SELECT * FROM $table WHERE id = $id LIMIT 1";
+
+        $result = self::setQuery(); 
+
+        if ($result) {
+            return self::convertObject($result, true);
+        } else {
+            return false;
+        }
+    }
 }

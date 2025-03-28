@@ -397,6 +397,7 @@ h2{
                 width: auto;
                 align-items: center;
                 margin-bottom: 15px;
+                gap: 12px;
             }
             a{
                 color: #29ef8a;

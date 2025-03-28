@@ -8,7 +8,17 @@
                     <div class="img" style="background-image: url('<?= $value->image ?>');"></div>
                     <p class="title-portafolios"><?= $value->title ?></p>
                     <div class="content-button-portafolio">
-                        <a href="<?= $value->url ?>" target="_blank" class="link-github">Github</a>
+                        <?php  if($_SERVER["REQUEST_URI"] !== "/dashboard" && !is_null($value->url)) { ?> 
+                            <a href="<?= $value->url ?>" target="_blank" class="link-github">See More</a>
+                        <?php } ?>
+
+                        <?php  if($_SERVER["REQUEST_URI"] !== "/dashboard" && !is_null($value->github_url)) { ?> 
+                            <a href="<?= $value->url ?>" target="_blank" class="link-github">Github</a>
+                        <?php } ?>
+
+                        <?php  if($_SERVER["REQUEST_URI"] === "/dashboard") { ?> 
+                            <a href="<?= routes("project.delete", ["id" => $value->id]) ?>" style="border-color: #ef2929; color: #ef2929; margin-left:10px;" class="link-edit">Delete</a>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>

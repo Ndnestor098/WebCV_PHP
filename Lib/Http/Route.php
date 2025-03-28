@@ -89,7 +89,7 @@ class Route {
             if (strpos($route, ":") !== false) {
                 $route = preg_replace("#:[a-zA-Z]+#", "([a-zA-Z0-9-_]+)", $route);
             }
-            
+
             if (preg_match("#^$route$#", $uri, $matches)) {
                 $params = array_slice($matches, 1);
     

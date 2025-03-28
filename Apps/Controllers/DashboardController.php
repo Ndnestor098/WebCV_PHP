@@ -2,10 +2,18 @@
 
 namespace Apps\Controllers;
 
+use Apps\Models\Certificate;
+use Apps\Models\Project;
 
 class DashboardController 
 {
     public function index() {
-        return render("dashboard");
+        $projects = Project::get();
+        $certificates = Certificate::get();
+
+        return render("dashboard", [
+            "projects" => $projects,
+            "certificates" => $certificates,
+        ]);
     }
 }
