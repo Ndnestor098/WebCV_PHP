@@ -3,6 +3,7 @@
 namespace Apps\Controllers;
 
 use Apps\Models\Certificate;
+use Lib\Http\Cookies;
 use Lib\Http\Request;
 use Lib\Http\Sessions;
 use Lib\Storage\Storage;
@@ -29,6 +30,8 @@ class CertificateController
             [$request->input("title"), $ImagePaht, $request->input("url"), date("Y-m-d H:i:s")]
         );
 
+        Cookies::remove("certificates");
+
         return redirect(routes("dashboard"));
     }   
 
@@ -37,6 +40,8 @@ class CertificateController
 
         if(Storage::delete($certificate->image) && Certificate::delete($id))
         {
+            Cookies::remove("certificates");
+            
             return redirect(routes("dashboard"));
         }
 

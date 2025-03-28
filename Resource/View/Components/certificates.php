@@ -12,11 +12,23 @@
                             <p class="title-certificado"><?= $value->title ?></p>
                             
                             <div class="content-button-certificado">
-                                <a href="<?= $value->url ?>" target="_blank" class="link-github" 
-                                aria-label="View Coursera Certificate: Botón del certificado" 
-                                title="View Coursera Certificate: Botón del certificado">
-                                    See More
-                                </a>
+                                <?php if($_SERVER["REQUEST_URI"] === "/dashboard") { ?>
+                                    <a 
+                                        href="<?= routes("certificate.delete", ["id" => $value->id]) ?>" 
+                                        class="link-github" 
+                                        style="border-color: #ef2929; color: #ef2929;"
+                                    >
+                                        delete
+                                    </a>
+                                <?php } ?>
+
+                                <?php if($_SERVER["REQUEST_URI"] !== "/dashboard") { ?>
+                                    <a href="<?= $value->url ?>" target="_blank" class="link-github" 
+                                    aria-label="<?= $value->title ?>" 
+                                    title="<?= $value->title ?>">
+                                        See More
+                                    </a>
+                                <?php } ?>
                             </div>
                         </div>
                     <?php } ?>

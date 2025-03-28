@@ -17,7 +17,7 @@
                         <?php } ?>
 
                         <?php  if($_SERVER["REQUEST_URI"] === "/dashboard") { ?> 
-                            <a href="<?= routes("project.delete", ["id" => $value->id]) ?>" style="border-color: #ef2929; color: #ef2929; margin-left:10px;" class="link-edit">Delete</a>
+                            <a href="<?= routes("project.delete", ["id" => $value->id]) ?>" style="border-color: #ef2929; color: #ef2929;" class="link-edit">Delete</a>
                         <?php } ?>
                     </div>
                 </div>
