@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
 
     <!--------------- DESCRIPCION --------------->
-    <title>My person: Nestor Salom</title>
+    <title>Nestor Salom | IT Support, Projects, and Web Development Services</title>
     <meta name="description" content="I'm Nestor a web developer and desktop app developer, merging creativity with responsibility to create unique digital experiences.">
     
     <meta name="product_id" content="102856451">
