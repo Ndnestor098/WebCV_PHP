@@ -5,40 +5,38 @@
 
     RewriteEngine On
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    # Redirigir HTTP a HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+    # Redirigir "www" a "sin www" para evitar contenido duplicado
     RewriteCond %{HTTP_HOST} ^www\.ndnestor\.com$ [NC]
-    RewriteRule ^(.*)$ https://ndnestor.com/$1 [L,R=301]
+    RewriteRule ^ https://ndnestor.com%{REQUEST_URI} [L,R=301]
 
-    # Redirect Trailing Slashes If Not A Folder...
+    # Redirigir Trailing Slashes Si No Es Una Carpeta...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # Redirigir todas las solicitudes a index.php si no es un archivo o carpeta
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
     <IfModule mod_headers.c>
-        # HTTP Strict Transport Security (HSTS) for enforcing HTTPS
+        # HTTP Strict Transport Security (HSTS) para forzar HTTPS
         Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        
-        # Content-Security-Policy Removed (No restrictions on external sources or inline styles)
-        # Removed the CSP headers that were causing issues for inline styles and external resources.
 
-        # X-Frame-Options to prevent clickjacking attacks
+        # X-Frame-Options para prevenir ataques de clickjacking
         Header always set X-Frame-Options "DENY"
 
-        # X-Content-Type-Options to prevent MIME-sniffing attacks
+        # X-Content-Type-Options para prevenir ataques de tipo MIME
         Header always set X-Content-Type-Options "nosniff"
 
-        # Referrer-Policy to control how much referrer information is sent with requests
+        # Referrer-Policy para controlar la cantidad de información del referer enviada con las solicitudes
         Header always set Referrer-Policy "no-referrer-when-downgrade"
 
-        # Permissions-Policy to limit the use of certain browser features and APIs
+        # Permissions-Policy para limitar el uso de ciertas funciones y APIs en el navegador
         Header always set Permissions-Policy "geolocation=(self), camera=()"
     </IfModule>
 </IfModule>

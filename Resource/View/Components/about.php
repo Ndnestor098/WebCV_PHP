@@ -21,12 +21,27 @@
                 </div>
             </div>
             <div class="area-texto">
-                <p>I define myself as a passionate web and desktop application developer, specialized in technologies such as 
-                    Laravel, JavaScript, CSS, SQL, React, Tailwind, Python, and PHP, with strong expertise in Eloquent ORM. My focus 
-                    goes beyond mere aesthetics; I am dedicated to creating distinctive digital experiences by blending creativity 
-                    with responsibility. My goal is to find the perfect balance between functionality and innovation in each 
-                    project. I am enthusiastic about challenges, always open to learning and constantly growing. Additionally, 
-                    I speak Spanish fluently, Italian at a B1 level, and English at a basic level.</p>
+                <p>
+                    I define myself as a passionate developer of web and 
+                    desktop applications, specialized in technologies such 
+                    as Laravel, JavaScript, CSS, SQL, React, Tailwind, 
+                    Python, and PHP, with extensive experience in Eloquent 
+                    ORM. My approach goes beyond mere aesthetics; I am 
+                    committed to creating distinctive digital experiences by 
+                    combining creativity with responsibility. My goal is to 
+                    find the perfect balance between functionality and 
+                    innovation in every project.
+                    <br>
+                    I am currently seeking new opportunities to contribute to 
+                    exciting projects and expand my horizons as a developer. 
+                    I am passionate about languages: I am a native Spanish speaker, 
+                    have an intermediate (B1) level of Italian, and I am currently 
+                    improving my English, with a particular focus on technical 
+                    English for programming and professional communication. I am 
+                    also interested in learning other languages in the future, 
+                    as I believe effective communication is key in a globalized 
+                    environment.
+                </p>
             </div>
             <div class="btn-contacto">
                 <a href="mailto:trabajo.nestor.098@gmail.com">Contact Me</a>
