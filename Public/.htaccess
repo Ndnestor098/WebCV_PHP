@@ -5,13 +5,14 @@
 
     RewriteEngine On
 
-    # Redirigir HTTP a HTTPS
-    RewriteCond %{HTTPS} off
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Redirigir "www" a "sin www" para evitar contenido duplicado
+    # Redirigir de www a sin www (solo si ya está en HTTPS)
+    RewriteCond %{HTTPS} on
     RewriteCond %{HTTP_HOST} ^www\.ndnestor\.com$ [NC]
     RewriteRule ^ https://ndnestor.com%{REQUEST_URI} [L,R=301]
+
+    # Redirigir de HTTP a HTTPS (solo si no es HTTPS)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Redirigir Trailing Slashes Si No Es Una Carpeta...
     RewriteCond %{REQUEST_FILENAME} !-d
