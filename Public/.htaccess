@@ -1,43 +1,26 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
     RewriteEngine On
 
-    # Redirigir de www a sin www (solo si ya está en HTTPS)
-    RewriteCond %{HTTPS} on
-    RewriteCond %{HTTP_HOST} ^www\.ndnestor\.com$ [NC]
+    # Redirigir todo de www a sin www y de http a https en una sola condición combinada
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [OR]
+    RewriteCond %{HTTPS} off
     RewriteRule ^ https://ndnestor.com%{REQUEST_URI} [L,R=301]
 
-    # Redirigir de HTTP a HTTPS (solo si no es HTTPS)
-    RewriteCond %{HTTPS} off
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Redirigir Trailing Slashes Si No Es Una Carpeta...
+    # Redirigir Trailing Slashes si no es carpeta
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Redirigir todas las solicitudes a index.php si no es un archivo o carpeta
+    # Enviar todo a index.php si no es archivo ni directorio
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
 
-    <IfModule mod_headers.c>
-        # HTTP Strict Transport Security (HSTS) para forzar HTTPS
-        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-
-        # X-Frame-Options para prevenir ataques de clickjacking
-        Header always set X-Frame-Options "DENY"
-
-        # X-Content-Type-Options para prevenir ataques de tipo MIME
-        Header always set X-Content-Type-Options "nosniff"
-
-        # Referrer-Policy para controlar la cantidad de información del referer enviada con las solicitudes
-        Header always set Referrer-Policy "no-referrer-when-downgrade"
-
-        # Permissions-Policy para limitar el uso de ciertas funciones y APIs en el navegador
-        Header always set Permissions-Policy "geolocation=(self), camera=()"
-    </IfModule>
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+    Header always set Permissions-Policy "geolocation=(self), camera=()"
 </IfModule>
