@@ -9,6 +9,9 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+    RewriteCond %{HTTP_HOST} ^www\.ndnestor\.com$ [NC]
+    RewriteRule ^(.*)$ https://ndnestor.com/$1 [L,R=301]
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
