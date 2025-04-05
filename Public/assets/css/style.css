@@ -864,4 +864,30 @@ footer{
         width: 50px !important;
         height: 50px !important;
     }
+
+    .content-certificado{
+        width: 345px !important;
+    }
+
+    .area-experiencias-sobre-mi .btn-contacto{
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .area-experiencias-sobre-mi .btn-contacto a{
+        margin: 0 !important;
+    }
+
+    .content-portafolio{
+        width: 350px !important;
+    }
+
+    .title-portafolios{ 
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .content-button-portafolio{
+        margin: 0 !important;
+    }
 }
