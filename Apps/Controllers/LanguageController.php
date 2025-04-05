@@ -47,8 +47,6 @@ class LanguageController
             [$request->input("title"), $ImagePaht, $request->input("level"), $request->input("architecture"), date("Y-m-d H:i:s")]
         );
 
-        Sessions::remove("languages");
-
         return redirect(routes("dashboard"));
     }   
 
@@ -56,9 +54,7 @@ class LanguageController
         $language = Language::find($id);
 
         if(Storage::delete($language->image) && Language::delete($id))
-        {
-            Sessions::remove("languages");
-            
+        {   
             return redirect(routes("dashboard"));
         }
 

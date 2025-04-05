@@ -29,8 +29,6 @@ class CertificateController
             [$request->input("title"), $ImagePaht, $request->input("url"), date("Y-m-d H:i:s")]
         );
 
-        Sessions::remove("certificates");
-
         return redirect(routes("dashboard"));
     }   
 
@@ -38,9 +36,7 @@ class CertificateController
         $certificate = Certificate::find($id);
 
         if(Storage::delete($certificate->image) && Certificate::delete($id))
-        {
-            Sessions::remove("certificates");
-            
+        {   
             return redirect(routes("dashboard"));
         }
 

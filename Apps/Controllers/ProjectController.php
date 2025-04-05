@@ -29,8 +29,6 @@ class ProjectController
             [$request->input("title"), $ImagePaht, $request->input("url"), $request->input("github"), date("Y-m-d H:i:s")]
         );
 
-        Sessions::remove("projects");
-
         return redirect(routes("dashboard"));
     }   
 
@@ -39,8 +37,6 @@ class ProjectController
 
         if(Storage::delete($project->image) && Project::delete($id))
         {
-            Sessions::remove("projects");
-            
             return redirect(routes("dashboard"));
         }
 
