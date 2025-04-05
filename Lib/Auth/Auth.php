@@ -10,15 +10,15 @@ class Auth
 {
     public static function check() : bool
     {
-        if(Cookies::has("session_remember")){
-            $remember = Cookies::get("session_remember");
+        if(Sessions::has("session_remember")){
+            $remember = Sessions::get("session_remember");
 
             $user = User::where("session_remember", $remember);
 
             return ($user && $user[0]->session_remember === $remember) ? true : false;
         }
 
-        $session = Cookies::get("session_token");
+        $session = Sessions::get("session_token");
 
         $user = User::where("session_token", $session);
 
@@ -35,7 +35,7 @@ class Auth
             $token = bin2hex(random_bytes(16));
             
             User::update("session_token", $token);
-            Cookies::set("session_token", $token);
+            Sessions::set("session_token", $token);
 
             if($remember){
                 $token = bin2hex(random_bytes(16));
