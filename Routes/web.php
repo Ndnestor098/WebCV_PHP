@@ -34,7 +34,7 @@ Route::post("/language/adding", [LanguageController::class, "create"])->middlewa
 Route::get("/language/delete/:id", [LanguageController::class, "destroy"])->middleware(Auth::class)->name("language.delete");
 
 Route::get("download", function() {
-    $path = "../public/assets/cv-en.pdf"; // Ruta al archivo que deseas descargar
+    $path = "../Public/assets/cv-en.pdf"; // Ruta al archivo que deseas descargar
     $fileName = "CV.pdf"; // Nombre que tendrá el archivo cuando se descargue
     
     // Verifica si el archivo existe
