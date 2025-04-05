@@ -36,7 +36,7 @@
     <!--------------- PRECONECCIONES --------------->
     <meta rel="canonical" href="https://ndnestor098.github.io/en/">
     <meta name="robots" content="NOODP,NOYDIR">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css?v=2">
     <link rel="preconnect" href="https://kit.fontawesome.com">
     <script src="https://kit.fontawesome.com/8f34396e62.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
