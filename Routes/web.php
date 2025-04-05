@@ -54,16 +54,13 @@ Route::get("download", function() {
         exit; // Termina la ejecución del script después de la descarga
     } else {
         // Si el archivo no existe, redirige a la página de inicio
-        // return redirect(routes("home"));
-        echo "file not found";
-        return ;
+        return redirect(routes("home"));
     }
 
-    echo "fuera del if";
     // Después de la descarga, redirige al home
-    // echo "<script type='text/javascript'>
-    //         setTimeout(function() {
-    //             window.location.href = '" . routes('home') . "';
-    //         }, 1000); // Redirige después de 1 segundo
-    //       </script>";
+    echo "<script type='text/javascript'>
+            setTimeout(function() {
+                window.location.href = '" . routes('home') . "';
+            }, 1000); // Redirige después de 1 segundo
+          </script>";
 })->name("download");
