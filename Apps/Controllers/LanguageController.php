@@ -3,7 +3,6 @@
 namespace Apps\Controllers;
 
 use Apps\Models\Language;
-use Lib\Http\Cookies;
 use Lib\Http\Request;
 use Lib\Http\Sessions;
 use Lib\Storage\Storage;
@@ -48,7 +47,7 @@ class LanguageController
             [$request->input("title"), $ImagePaht, $request->input("level"), $request->input("architecture"), date("Y-m-d H:i:s")]
         );
 
-        Cookies::remove("languages");
+        Sessions::remove("languages");
 
         return redirect(routes("dashboard"));
     }   
@@ -58,7 +57,7 @@ class LanguageController
 
         if(Storage::delete($language->image) && Language::delete($id))
         {
-            Cookies::remove("languages");
+            Sessions::remove("languages");
             
             return redirect(routes("dashboard"));
         }

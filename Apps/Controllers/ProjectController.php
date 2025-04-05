@@ -3,7 +3,6 @@
 namespace Apps\Controllers;
 
 use Apps\Models\Project;
-use Lib\Http\Cookies;
 use Lib\Http\Request;
 use Lib\Http\Sessions;
 use Lib\Storage\Storage;
@@ -30,7 +29,7 @@ class ProjectController
             [$request->input("title"), $ImagePaht, $request->input("url"), $request->input("github"), date("Y-m-d H:i:s")]
         );
 
-        Cookies::remove("projects");
+        Sessions::remove("projects");
 
         return redirect(routes("dashboard"));
     }   
@@ -40,7 +39,7 @@ class ProjectController
 
         if(Storage::delete($project->image) && Project::delete($id))
         {
-            Cookies::remove("projects");
+            Sessions::remove("projects");
             
             return redirect(routes("dashboard"));
         }
