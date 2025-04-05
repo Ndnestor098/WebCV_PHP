@@ -10,7 +10,7 @@
         <p>Web Developer</p>
         
         <div class="btn-contacto">
-            <a href="/assets/pdf/cv-en.pdf" target="_blank">Download CV</a>
+            <a href="<?= routes("download")?>" target="_blank">Download CV</a>
             <a href="#Ubicacion-CT">Contact</a>
         </div>
     </div>
