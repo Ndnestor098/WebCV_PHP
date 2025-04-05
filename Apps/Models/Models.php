@@ -22,7 +22,8 @@ class Models {
             }
         }
 
-        self::$table = strtolower(basename(get_called_class())) . "s";
+        $class = explode('\\', get_called_class());
+        self::$table = strtolower(end($class)) . "s";
     }
 
     protected static function setQuery() 
