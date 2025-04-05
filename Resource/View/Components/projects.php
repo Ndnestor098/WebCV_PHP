@@ -13,7 +13,7 @@
                         <?php } ?>
 
                         <?php  if($_SERVER["REQUEST_URI"] !== "/dashboard" && !is_null($value->github_url)) { ?> 
-                            <a href="<?= $value->url ?>" target="_blank" class="link-github">Github</a>
+                            <a href="<?= $value->github_url ?>" target="_blank" class="link-github">Github</a>
                         <?php } ?>
 
                         <?php  if($_SERVER["REQUEST_URI"] === "/dashboard") { ?> 
