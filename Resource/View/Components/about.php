@@ -32,6 +32,7 @@
                     find the perfect balance between functionality and 
                     innovation in every project.
                     <br>
+                    <br>
                     I am currently seeking new opportunities to contribute to 
                     exciting projects and expand my horizons as a developer. 
                     I am passionate about languages: I am a native Spanish speaker, 
