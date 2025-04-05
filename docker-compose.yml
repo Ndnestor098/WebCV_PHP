@@ -1,0 +1,15 @@
+services:
+  web:
+    image: php:8.0-apache        # Usa la imagen oficial de PHP con Apache
+    container_name: myweb        # Nombre del contenedor
+    volumes:
+      - ./:/var/www/html         # Mapea el directorio actual al contenedor
+    networks:
+      - nginx_red               # Conecta a la red 'nginx_red'
+    restart: always              # Siempre reinicia el contenedor si se detiene
+    expose:
+      - 80                        # Expone el puerto 80, pero solo para la red interna
+
+networks:
+  nginx_red:
+    external: true                # Usa una red externa llamada 'nginx_red'
