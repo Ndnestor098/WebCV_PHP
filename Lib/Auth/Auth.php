@@ -3,7 +3,6 @@
 namespace Lib\Auth;
 
 use Apps\Models\User;
-use Lib\Http\Cookies;
 use Lib\Http\Sessions;
 
 class Auth 
@@ -40,7 +39,7 @@ class Auth
             if($remember){
                 $token = bin2hex(random_bytes(16));
                 User::update("session_remember", $token);
-                Cookies::set("session_remember", $token, 259200);            
+                Sessions::set("session_remember", $token, 259200);            
             }
 
             Sessions::remove("old");
@@ -53,16 +52,16 @@ class Auth
     }
 
     public static function logout() {
-        if(Cookies::has("session_remember")){
+        if(Sessions::has("session_remember")){
             User::update("session_remember", null);
 
-            Cookies::remove("session_remember");
+            Sessions::remove("session_remember");
 
             return true;
         }
 
         User::update("session_token", null);
-        Cookies::remove("session_token");
+        Sessions::remove("session_token");
 
         Sessions::regenerate();
 

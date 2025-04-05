@@ -5,17 +5,16 @@ namespace Apps\Controllers;
 use Apps\Models\Certificate;
 use Apps\Models\Language;
 use Apps\Models\Project;
-use Lib\Auth\Auth;
-use Lib\Http\Cookies;
+use Lib\Http\Sessions;
 
 class HomeController 
 {
     public function index() 
     {
-        if(Cookies::has("certificates") && Cookies::has("projects") && Cookies::has("languages")){
-            $certificates = Cookies::get("certificates");
-            $projects = Cookies::get("projects");
-            $languages = Cookies::get("languages");
+        if(Sessions::has("certificates") && Sessions::has("projects") && Sessions::has("languages")){
+            $certificates = Sessions::get("certificates");
+            $projects = Sessions::get("projects");
+            $languages = Sessions::get("languages");
 
         } else {
             $certificates = Certificate::get();
@@ -24,9 +23,9 @@ class HomeController
     
             $languages = Language::get();
 
-            Cookies::set("certificates", $certificates);
-            Cookies::set("projects", $projects);
-            Cookies::set("languages", $languages);
+            Sessions::set("certificates", $certificates);
+            Sessions::set("projects", $projects);
+            Sessions::set("languages", $languages);
         }
 
         return render("home", [
