@@ -1,10 +1,10 @@
 <?php
 
 
-require_once "../Lib/constants.php";
-require_once "../Lib/env.php";
-require_once "../Lib/autoload.php";
-require_once "../Routes/web.php";
+require_once (__DIR__ . "/../Lib/constants.php");
+require_once (__DIR__ . "/../Lib/env.php");
+require_once (__DIR__ . "/../Lib/autoload.php");
+require_once (__DIR__ . "/../Routes/web.php");
 use Lib\Http\Route;
 
 Route::run();
