@@ -32,3 +32,35 @@ Route::get("/certificate/delete/:id", [CertificateController::class, "destroy"])
 Route::post("/language/adding", [LanguageController::class, "create"])->middleware(Auth::class)->name("language.adding");
 
 Route::get("/language/delete/:id", [LanguageController::class, "destroy"])->middleware(Auth::class)->name("language.delete");
+
+Route::get("download", function() {
+    $path = "../public/assets/cv-en.pdf"; // Ruta al archivo que deseas descargar
+    $fileName = "CV.pdf"; // Nombre que tendrá el archivo cuando se descargue
+    
+    // Verifica si el archivo existe
+    if (file_exists($path)) {
+        // Establece las cabeceras para la descarga del archivo
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/pdf'); // Tipo de contenido del archivo (en este caso PDF)
+        header('Content-Disposition: attachment; filename="' . basename($fileName) . '"'); // Forzar descarga con el nombre indicado
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($path)); // Tamaño del archivo
+
+        // Envía el archivo al navegador
+        readfile($path);
+        exit; // Termina la ejecución del script después de la descarga
+    } else {
+        // Si el archivo no existe, redirige a la página de inicio
+        return redirect(routes("home"));
+    }
+
+    // Después de la descarga, redirige al home
+    echo "<script type='text/javascript'>
+            setTimeout(function() {
+                window.location.href = '" . routes('home') . "';
+            }, 1000); // Redirige después de 1 segundo
+          </script>";
+})->name("download");
