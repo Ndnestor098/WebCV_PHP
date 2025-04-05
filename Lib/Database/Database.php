@@ -3,25 +3,28 @@
 namespace Lib\Database;
 
 use Exception;
-use PDO;
-use PDOException;
 
 class Database {
     protected static $conn;
+    protected $server;
+    protected $user;
+    protected $password;
     protected $database_name;
+    protected $port;
 
     public function __construct() {
-        // Usar el nombre de la base de datos que esté definido en el entorno, por defecto "database.sqlite"
-        $this->database_name = getenv("DB_DATABASE") ?: "database.sqlite"; 
+        $this->server = getenv("DB_HOST") ?: "127.0.0.1";
+        $this->user = getenv("DB_USERNAME") ?: "root";
+        $this->password = getenv("DB_PASSWORD") ?: "";
+        $this->database_name = getenv("DB_DATABASE") ?: "web";
+        $this->port = getenv("DB_PORT") ?: "3306"; 
 
         if (!isset(self::$conn)) {
-            // Conectar usando PDO a SQLite
-            $dsn = "sqlite:" . __DIR__ . "/" . $this->database_name;
-            try {
-                self::$conn = new PDO($dsn);
-                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                throw new Exception("Connection error: " . $e->getMessage());
+            self::$conn = new mysqli($this->server, $this->user, $this->password, $this->database_name, $this->port);
+ 
+            // Verificar errores de conexión
+            if (self::$conn->connect_error) {
+                throw new Exception("Connection error: " . self::$conn->connect_error);
             }
         }
     }
