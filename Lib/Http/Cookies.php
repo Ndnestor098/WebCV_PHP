@@ -12,7 +12,7 @@ class Cookies
 
         $value = is_array($value) ? json_encode($value) : $value;
 
-        setcookie($key, $value, time() + $time, "/");
+        setcookie($key, $value, time() + $time, "/", "", true, true);
     }
 
     public static function get(string $key, mixed $default = null): mixed
