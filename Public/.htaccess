@@ -1,26 +1,44 @@
 <IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
     RewriteEngine On
 
-    # Redirigir todo de www a sin www y de http a https en una sola condición combinada
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [OR]
-    RewriteCond %{HTTPS} off
-    RewriteRule ^ https://ndnestor.com%{REQUEST_URI} [L,R=301]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]y
 
-    # Redirigir Trailing Slashes si no es carpeta
+    RewriteCond %{HTTP_HOST} ^www\.ndnestor\.com$ [NC]
+    RewriteRule ^(.*)$ https://ndnestor.com/$1 [L,R=301]
+
+    # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Enviar todo a index.php si no es archivo ni directorio
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-</IfModule>
 
-<IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    Header always set X-Frame-Options "DENY"
-    Header always set X-Content-Type-Options "nosniff"
-    Header always set Referrer-Policy "no-referrer-when-downgrade"
-    Header always set Permissions-Policy "geolocation=(self), camera=()"
+    <IfModule mod_headers.c>
+        # HTTP Strict Transport Security (HSTS) for enforcing HTTPS
+        Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # Content-Security-Policy Removed (No restrictions on external sources or inline styles)
+        # Removed the CSP headers that were causing issues for inline styles and external resources.
+
+        # X-Frame-Options to prevent clickjacking attacks
+        Header always set X-Frame-Options "DENY"
+
+        # X-Content-Type-Options to prevent MIME-sniffing attacks
+        Header always set X-Content-Type-Options "nosniff"
+
+        # Referrer-Policy to control how much referrer information is sent with requests
+        Header always set Referrer-Policy "no-referrer-when-downgrade"
+
+        # Permissions-Policy to limit the use of certain browser features and APIs
+        Header always set Permissions-Policy "geolocation=(self), camera=()"
+    </IfModule>
 </IfModule>
