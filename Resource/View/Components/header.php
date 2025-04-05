@@ -11,7 +11,7 @@
         
         <div class="btn-contacto">
             <a href="<?= routes("download")?>">Download CV</a>
-            <a href="#Ubicacion-CT">Contact</a>
+            <a href="mailto:trabajo.nestor.098@gmail.com">Contact</a>
         </div>
     </div>
 </header>

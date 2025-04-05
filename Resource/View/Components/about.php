@@ -29,7 +29,7 @@
                     I speak Spanish fluently, Italian at a B1 level, and English at a basic level.</p>
             </div>
             <div class="btn-contacto">
-                <button>Contact Me</button>
+                <a href="mailto:trabajo.nestor.098@gmail.com">Contact Me</a>
             </div>
         </div>
     </section>
