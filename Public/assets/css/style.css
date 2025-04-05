@@ -890,4 +890,8 @@ footer{
     .content-button-portafolio{
         margin: 0 !important;
     }
+
+    .brutalist-button{
+        height: 70px !important;
+    }
 }
