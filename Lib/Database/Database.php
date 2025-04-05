@@ -1,8 +1,8 @@
 <?php
-
 namespace Lib\Database;
 
 use Exception;
+use PDO;
 use PDOException;
 
 class Database {
@@ -25,22 +25,12 @@ class Database {
         }
     }
 
+    // El método __destruct no necesita hacer nada con la conexión en PDO
     public function __destruct() {
-        if (isset(self::$conn)) {
-            self::$conn->close();
-        }
+        // No se necesita cerrar la conexión manualmente en PDO
     }
 
     public function conn(){
         return self::$conn;
-    }
-
-    public function config(){
-        return "Connection: " . getenv("DB_CONNECTION") .
-               " <br>Server Name: " . getenv("DB_HOST") . 
-               " <br>Port: " . getenv("DB_PORT") .
-               " <br>Database: " . getenv("DB_DATABASE") .
-               " <br>User Name: " . getenv("DB_USERNAME") . 
-               " <br>Password: " . getenv("DB_PASSWORD");
     }
 }
