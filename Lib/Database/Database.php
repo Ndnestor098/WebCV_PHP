@@ -6,21 +6,21 @@ use Exception;
 
 class Database {
     protected static $conn;
-    protected $server;
+    protected $host;
     protected $user;
     protected $password;
     protected $database_name;
     protected $port;
 
     public function __construct() {
-        // Usar el nombre de la base de datos que esté definido en el entorno, por defecto "database.sqlite"
-        $this->database_name = getenv("DB_DATABASE") ?: "database.sqlite"; 
+        self::$host = getenv('MYSQL_HOST');
+        self::$user = getenv('MYSQL_USER');
+        self::$password = getenv('MYSQL_PASSWORD');
+        self::$database_name = getenv('MYSQL_DATABASE');
 
         if (!isset(self::$conn)) {
-            // Conectar usando PDO a SQLite
-            $dsn = "sqlite:" . __DIR__ . "/" . $this->database_name;
             try {
-                self::$conn = new \PDO($dsn);
+                self::$conn = new \PDO("mysql:host=".self::$host.";dbname=".self::$database_name, self::$user, self::$password);
                 self::$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             } catch (\PDOException $e) {
                 throw new Exception("Connection error: " . $e->getMessage());
