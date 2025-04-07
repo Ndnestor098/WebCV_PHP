@@ -12,7 +12,6 @@ class ProjectController
     public function create(Request $request) {
         $request->validate([
             "title" => ["required"],
-            "url" => ["required"],
         ]);
 
         $projects = Project::get();

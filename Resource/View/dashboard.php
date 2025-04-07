@@ -48,7 +48,6 @@ layout("app", function () use ($projects, $certificates, $languages) { ?>
                                     name="url" 
                                     id="url" 
                                     placeholder="Project Url" 
-                                    required
                                     value="<?= old("url") ?>"
                                     style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
                                 >
@@ -59,7 +58,6 @@ layout("app", function () use ($projects, $certificates, $languages) { ?>
                                     name="github" 
                                     id="github" 
                                     placeholder="Github Url" 
-                                    required
                                     value="<?= old("github") ?>"
                                     style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;"
                                 >

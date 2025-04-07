@@ -23,11 +23,6 @@ class Database {
         }
     }
 
-    // El método __destruct no necesita hacer nada con la conexión en PDO
-    public function __destruct() {
-        // No se necesita cerrar la conexión manualmente en PDO
-    }
-
     public function conn(){
         return self::$conn;
     }
