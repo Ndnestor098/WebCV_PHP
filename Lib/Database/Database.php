@@ -13,7 +13,7 @@ class Database {
     protected $port;
 
     public function __construct() {
-        self::$host = getenv('MYSQL_HOST');
+        self::$host = getenv('MYSQL_HOST') ?? 'mysql';
         self::$user = getenv('MYSQL_USER');
         self::$password = getenv('MYSQL_PASSWORD');
         self::$database_name = getenv('MYSQL_DATABASE');
