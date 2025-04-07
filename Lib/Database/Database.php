@@ -6,24 +6,19 @@ use Exception;
 
 class Database {
     protected static $conn;
-    protected $host;
-    protected $user;
-    protected $password;
-    protected $database_name;
-    protected $port;
 
     public function __construct() {
-        self::$host = getenv('MYSQL_HOST') ?? 'mysql';
-        self::$user = getenv('MYSQL_USER');
-        self::$password = getenv('MYSQL_PASSWORD');
-        self::$database_name = getenv('MYSQL_DATABASE');
+        $host = getenv('MYSQL_HOST');
+        $user = getenv('MYSQL_USER');
+        $password = getenv('MYSQL_PASSWORD');
+        $database = getenv('MYSQL_DATABASE');
 
         if (!isset(self::$conn)) {
             try {
-                self::$conn = new \PDO("mysql:host=".self::$host.";dbname=".self::$database_name, self::$user, self::$password);
+                self::$conn = new \PDO("mysql:host=$host;dbname=$database", $user, $password);
                 self::$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             } catch (\PDOException $e) {
-                throw new Exception("Connection error: " . $e->getMessage());
+                throw new \Exception("Connection error: " . $e->getMessage());
             }
         }
     }
