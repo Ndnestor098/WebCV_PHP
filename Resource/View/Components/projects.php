@@ -8,7 +8,7 @@
                     <div class="img" style="background-image: url('<?= $value->image ?>');"></div>
                     <p class="title-portafolios"><?= $value->title ?></p>
                     <div class="content-button-portafolio">
-                        <?php  if($_SERVER["REQUEST_URI"] !== "/dashboard" && !is_null($value->url)) { ?> 
+                        <?php  if($_SERVER["REQUEST_URI"] !== "/dashboard" && strlen($value->url) > 4) { ?> 
                             <a href="<?= $value->url ?>" target="_blank" class="link-github">See More</a>
                         <?php } ?>
 
