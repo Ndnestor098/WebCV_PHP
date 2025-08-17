@@ -4,6 +4,7 @@ services:
     container_name: myweb        # Nombre del contenedor
     volumes:
       - ./:/var/www/html         # Mapea el directorio actual al contenedor
+      - /home/ndnestor/projects/nginx/data/logs:/var/log/npm:ro # Mapea la carpeta de logs de Nginx
     networks:
       - nginx_red               # Conecta a la red 'nginx_red'
     restart: always              # Siempre reinicia el contenedor si se detiene

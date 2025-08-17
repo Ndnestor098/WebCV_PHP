@@ -16,7 +16,10 @@ Route::get("/login", [LoginController::class, "index"]);
 Route::post("/login", [LoginController::class, "login"])->name("login");
 Route::get("/logout", [LoginController::class, "logout"])->name("logout");
  
-Route::get("/dashboard", DashboardController::class)->middleware(Auth::class)->name("dashboard");
+Route::get("/dashboard", [DashboardController::class, "index"])->middleware(Auth::class)->name("dashboard");
+
+Route::get("/dashboard/logs", [DashboardController::class, "logs"])->middleware(Auth::class)->name("logs");
+
 
 // =================================================== Projects ===================================================
 Route::post("/project/adding", [ProjectController::class, "create"])->middleware(Auth::class)->name("project.adding");

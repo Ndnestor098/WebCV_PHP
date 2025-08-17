@@ -19,4 +19,12 @@ class DashboardController
             "languages" => $languages
         ]);
     }
+
+    public function logs() {
+        $data = []; // Reemplaza esto con la lógica real para obtener los datos de los logs
+
+        return render("logs", [
+            "data" => $data
+        ]);
+    }
 }

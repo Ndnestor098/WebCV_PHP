@@ -36,10 +36,19 @@
     <!--------------- PRECONECCIONES --------------->
     <meta rel="canonical" href="https://ndnestor098.github.io/en/">
     <meta name="robots" content="NOODP,NOYDIR">
-    <link rel="stylesheet" href="/assets/css/style.css?v=4">
     <link rel="preconnect" href="https://kit.fontawesome.com">
     <script src="https://kit.fontawesome.com/8f34396e62.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <?php 
+        $url = $_SERVER['REQUEST_URI'];
+
+        if (strpos($url, "logs") !== false) {
+            echo '<link rel="stylesheet" href="/assets/css/styleLogs.css?v=1">';
+        } else {
+            echo '<link rel="stylesheet" href="/assets/css/style.css?v=4">';
+        } 
+    ?>
 
     <!--------------- FAVICON --------------->
     <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" type="image/x-icon">

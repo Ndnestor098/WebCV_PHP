@@ -3,18 +3,12 @@
 layout("app", function () use ($projects, $certificates, $languages) { ?>
 
     
-    <a href="<?= routes("home") ?>" style="display: flex; flex-direction:column; align-items:center;width:50px;position:sticky;top:22px;left:10px">
-        <span style="color: #80b39c; font-weight:700">Home</span>
-    </a>
-
-    <a href="<?= routes("logout") ?>" style="display: flex; flex-direction:column; align-items:center;width:50px;position:sticky;top:22px;left:80px">
-        <span style="color: #80b39c; font-weight:700">Logout</span>
-    </a>
+    <?= components("menuDasboard") ?>
 
     <!--------------- Contenido de la pagina Web --------------->
     <main>
         <section>
-    <!-- =================================================== Projects =================================================== -->
+        <!-- =================================================== Projects =================================================== -->
             <?= components("projects", ["projects" => $projects]) ?>
 
             <div class="Experiencias">
@@ -77,7 +71,7 @@ layout("app", function () use ($projects, $certificates, $languages) { ?>
             </div>
 
 
-    <!-- =================================================== Certificates =================================================== -->
+        <!-- =================================================== Certificates =================================================== -->
             <?= components("certificates", ["certificates" => $certificates]) ?>
             
             <div class="Experiencias">
@@ -131,7 +125,7 @@ layout("app", function () use ($projects, $certificates, $languages) { ?>
                 </div>
             </div>
 
-    <!-- =================================================== Languages =================================================== -->
+        <!-- =================================================== Languages =================================================== -->
             <?= components("experience", ["languages" => $languages]) ?>
             
             <div class="Experiencias">
